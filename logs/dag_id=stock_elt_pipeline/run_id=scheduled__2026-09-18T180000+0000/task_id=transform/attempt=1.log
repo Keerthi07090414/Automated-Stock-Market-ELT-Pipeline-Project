@@ -1,42 +1,0 @@
-[2026-09-22T08:40:20.309+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
-[2026-09-22T08:40:20.324+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: stock_elt_pipeline.transform scheduled__2026-09-18T18:00:00+00:00 [queued]>
-[2026-09-22T08:40:20.332+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: stock_elt_pipeline.transform scheduled__2026-09-18T18:00:00+00:00 [queued]>
-[2026-09-22T08:40:20.333+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 3
-[2026-09-22T08:40:20.346+0000] {taskinstance.py:2889} INFO - Executing <Task(BashOperator): transform> on 2026-09-18 18:00:00+00:00
-[2026-09-22T08:40:20.352+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=324) is multi-threaded, use of fork() may lead to deadlocks in the child.
-[2026-09-22T08:40:20.352+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'stock_elt_pipeline', 'transform', 'scheduled__2026-09-18T18:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/stock_pipeline_dag.py', '--cfg-path', '/tmp/tmpkglyno3_']
-[2026-09-22T08:40:20.353+0000] {standard_task_runner.py:72} INFO - Started process 325 to run task
-[2026-09-22T08:40:20.355+0000] {standard_task_runner.py:105} INFO - Job 4: Subtask transform
-[2026-09-22T08:40:20.402+0000] {task_command.py:467} INFO - Running <TaskInstance: stock_elt_pipeline.transform scheduled__2026-09-18T18:00:00+00:00 [running]> on host 39abfacf40a6
-[2026-09-22T08:40:20.468+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='keerthi' AIRFLOW_CTX_DAG_ID='stock_elt_pipeline' AIRFLOW_CTX_TASK_ID='transform' AIRFLOW_CTX_EXECUTION_DATE='2026-09-18T18:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-09-18T18:00:00+00:00'
-[2026-09-22T08:40:20.481+0000] {taskinstance.py:731} INFO - ::endgroup::
-[2026-09-22T08:40:20.503+0000] {subprocess.py:78} INFO - Tmp dir root location: /tmp
-[2026-09-22T08:40:20.510+0000] {subprocess.py:88} INFO - Running command: ['/usr/bin/bash', '-c', 'cd /opt/*** && python src/transform.py']
-[2026-09-22T08:40:20.528+0000] {subprocess.py:99} INFO - Output:
-[2026-09-22T08:40:21.356+0000] {subprocess.py:106} INFO - WARNING: Using incubator modules: jdk.incubator.vector
-[2026-09-22T08:40:22.937+0000] {subprocess.py:106} INFO - Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
-[2026-09-22T08:40:22.938+0000] {subprocess.py:106} INFO - Setting default log level to "WARN".
-[2026-09-22T08:40:22.939+0000] {subprocess.py:106} INFO - To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-[2026-09-22T08:40:23.747+0000] {subprocess.py:106} INFO - 26/09/22 08:40:23 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-[2026-09-22T08:40:36.251+0000] {subprocess.py:106} INFO - [Stage 1:>                                                          (0 + 1) / 1][Stage 6:>                                                          (0 + 1) / 1]                                                                                Transformed 220 rows -> data/processed/prices_transformed.parquet
-[2026-09-22T08:40:36.257+0000] {subprocess.py:106} INFO - +----------+----------+------------------+----------------+-------------+--------------+
-[2026-09-22T08:40:36.259+0000] {subprocess.py:106} INFO - |    symbol|      date|             close|daily_return_pct|moving_avg_7d|moving_avg_30d|
-[2026-09-22T08:40:36.260+0000] {subprocess.py:106} INFO - +----------+----------+------------------+----------------+-------------+--------------+
-[2026-09-22T08:40:36.261+0000] {subprocess.py:106} INFO - |HCLTECH.NS|2026-08-24|            1322.0|            NULL|       1322.0|        1322.0|
-[2026-09-22T08:40:36.263+0000] {subprocess.py:106} INFO - |HCLTECH.NS|2026-08-25| 1315.800048828125|           -0.47|       1318.9|        1318.9|
-[2026-09-22T08:40:36.264+0000] {subprocess.py:106} INFO - |HCLTECH.NS|2026-08-26|            1298.5|           -1.31|       1312.1|        1312.1|
-[2026-09-22T08:40:36.266+0000] {subprocess.py:106} INFO - |HCLTECH.NS|2026-08-27|            1282.0|           -1.27|      1304.58|       1304.58|
-[2026-09-22T08:40:36.267+0000] {subprocess.py:106} INFO - |HCLTECH.NS|2026-08-28|1316.0999755859375|            2.66|      1306.88|       1306.88|
-[2026-09-22T08:40:36.268+0000] {subprocess.py:106} INFO - |HCLTECH.NS|2026-08-31| 1312.199951171875|            -0.3|      1307.77|       1307.77|
-[2026-09-22T08:40:36.269+0000] {subprocess.py:106} INFO - |HCLTECH.NS|2026-09-01|1351.4000244140625|            2.99|       1314.0|        1314.0|
-[2026-09-22T08:40:36.270+0000] {subprocess.py:106} INFO - |HCLTECH.NS|2026-09-02|            1331.5|           -1.47|      1315.36|       1316.19|
-[2026-09-22T08:40:36.271+0000] {subprocess.py:106} INFO - |HCLTECH.NS|2026-09-03|            1319.0|           -0.94|      1315.81|        1316.5|
-[2026-09-22T08:40:36.272+0000] {subprocess.py:106} INFO - |HCLTECH.NS|2026-09-04|1293.4000244140625|           -1.94|      1315.09|       1314.19|
-[2026-09-22T08:40:36.273+0000] {subprocess.py:106} INFO - +----------+----------+------------------+----------------+-------------+--------------+
-[2026-09-22T08:40:36.274+0000] {subprocess.py:106} INFO - only showing top 10 rows
-[2026-09-22T08:40:36.758+0000] {subprocess.py:110} INFO - Command exited with return code 0
-[2026-09-22T08:40:36.805+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
-[2026-09-22T08:40:36.807+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=stock_elt_pipeline, task_id=transform, run_id=scheduled__2026-09-18T18:00:00+00:00, execution_date=20260918T180000, start_date=20260922T084020, end_date=20260922T084036
-[2026-09-22T08:40:36.868+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
-[2026-09-22T08:40:36.897+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
-[2026-09-22T08:40:36.902+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
