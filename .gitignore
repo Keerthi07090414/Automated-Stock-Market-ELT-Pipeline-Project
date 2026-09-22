@@ -3,3 +3,6 @@ data/
 .env
 __pycache__/
 *.parquet
+logs/
+plugins/
+*.log
