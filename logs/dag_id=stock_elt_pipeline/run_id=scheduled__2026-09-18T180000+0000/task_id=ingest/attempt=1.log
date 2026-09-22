@@ -1,0 +1,22 @@
+[2026-09-22T08:40:13.618+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-09-22T08:40:13.631+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: stock_elt_pipeline.ingest scheduled__2026-09-18T18:00:00+00:00 [queued]>
+[2026-09-22T08:40:13.640+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: stock_elt_pipeline.ingest scheduled__2026-09-18T18:00:00+00:00 [queued]>
+[2026-09-22T08:40:13.641+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 3
+[2026-09-22T08:40:13.652+0000] {taskinstance.py:2889} INFO - Executing <Task(BashOperator): ingest> on 2026-09-18 18:00:00+00:00
+[2026-09-22T08:40:13.660+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=302) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-09-22T08:40:13.659+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'stock_elt_pipeline', 'ingest', 'scheduled__2026-09-18T18:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/stock_pipeline_dag.py', '--cfg-path', '/tmp/tmpf5okqoxc']
+[2026-09-22T08:40:13.662+0000] {standard_task_runner.py:72} INFO - Started process 303 to run task
+[2026-09-22T08:40:13.663+0000] {standard_task_runner.py:105} INFO - Job 3: Subtask ingest
+[2026-09-22T08:40:13.711+0000] {task_command.py:467} INFO - Running <TaskInstance: stock_elt_pipeline.ingest scheduled__2026-09-18T18:00:00+00:00 [running]> on host 39abfacf40a6
+[2026-09-22T08:40:13.781+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='keerthi' AIRFLOW_CTX_DAG_ID='stock_elt_pipeline' AIRFLOW_CTX_TASK_ID='ingest' AIRFLOW_CTX_EXECUTION_DATE='2026-09-18T18:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-09-18T18:00:00+00:00'
+[2026-09-22T08:40:13.782+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2026-09-22T08:40:13.822+0000] {subprocess.py:78} INFO - Tmp dir root location: /tmp
+[2026-09-22T08:40:13.824+0000] {subprocess.py:88} INFO - Running command: ['/usr/bin/bash', '-c', 'cd /opt/*** && python src/ingest.py']
+[2026-09-22T08:40:13.837+0000] {subprocess.py:99} INFO - Output:
+[2026-09-22T08:40:19.311+0000] {subprocess.py:106} INFO - Saved 220 rows to data/raw/prices_2026-09-22.parquet
+[2026-09-22T08:40:19.429+0000] {subprocess.py:110} INFO - Command exited with return code 0
+[2026-09-22T08:40:19.453+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2026-09-22T08:40:19.455+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=stock_elt_pipeline, task_id=ingest, run_id=scheduled__2026-09-18T18:00:00+00:00, execution_date=20260918T180000, start_date=20260922T084013, end_date=20260922T084019
+[2026-09-22T08:40:19.484+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2026-09-22T08:40:19.503+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-09-22T08:40:19.507+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

@@ -52,23 +52,27 @@ def load():
     ]
 
     with engine.begin() as conn:
-        stocks.to_sql("dim_stock", conn, if_exists="append", index=False,
+        # dim_stock: upload to a staging table, then insert-if-not-exists
+        stocks.to_sql("dim_stock_staging", conn, if_exists="replace", index=False,
                        method="multi", chunksize=500)
-        dates.to_sql("dim_date", conn, if_exists="append", index=False,
+        conn.execute(text("""
+            INSERT INTO dim_stock (symbol, company_name)
+            SELECT symbol, company_name FROM dim_stock_staging
+            ON CONFLICT (symbol) DO NOTHING
+        """))
+        conn.execute(text("DROP TABLE dim_stock_staging"))
+
+        # dim_date: same pattern
+        dates.to_sql("dim_date_staging", conn, if_exists="replace", index=False,
                       method="multi", chunksize=500)
-
-    # Avoid duplicate-key errors on dim tables from repeated loads
-    with engine.begin() as conn:
         conn.execute(text("""
-            DELETE FROM dim_stock a USING dim_stock b
-            WHERE a.ctid < b.ctid AND a.symbol = b.symbol
+            INSERT INTO dim_date (date_key, year, month, day, weekday)
+            SELECT date_key, year, month, day, weekday FROM dim_date_staging
+            ON CONFLICT (date_key) DO NOTHING
         """))
-        conn.execute(text("""
-            DELETE FROM dim_date a USING dim_date b
-            WHERE a.ctid < b.ctid AND a.date_key = b.date_key
-        """))
+        conn.execute(text("DROP TABLE dim_date_staging"))
 
-    with engine.begin() as conn:
+        # fact_prices: same pattern (already worked before)
         fact.to_sql("fact_prices_staging", conn, if_exists="replace", index=False,
                      method="multi", chunksize=500)
         conn.execute(text("""
@@ -83,7 +87,7 @@ def load():
         """))
         conn.execute(text("DROP TABLE fact_prices_staging"))
 
-    print(f"Loaded {len(fact)} rows into fact_prices")
+    print(f"Load complete. Processed {len(fact)} fact rows (duplicates safely skipped).")
 
 
 if __name__ == "__main__":

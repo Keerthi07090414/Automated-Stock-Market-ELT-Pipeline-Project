@@ -1,9 +1,7 @@
-yfinance
 pandas
 pyarrow
 pyspark
 sqlalchemy
 psycopg2-binary
 python-dotenv
-pytest
-
+yfinance
